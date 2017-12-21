@@ -10,12 +10,21 @@ This repository is all about cheat sheets and notes for building Laravel project
 ## Usefull Commands
 
 ```
-0- composer global require "laravel/installer"   # via laravel installer
-0.1- laravel new blog  #if installer is used
-1- composer create-project laravel/laravel your-project-name    # Creating new project 
-2- php artisan serve   # Running PHP Server
-3- php artisan serve --port=8080   # Listen to specific port
-4- php artisan key:generate   #generating application key
+00- composer global require "laravel/installer"                  #via laravel installer
+01- laravel new blog                                             #if installer is used
+02- composer create-project laravel/laravel your-project-name    # Creating new project 
+-----------------------------------------------------------------------------------
+03- php artisan serve               # Running PHP Server
+04- php artisan serve --port=8080   # Listen to specific port
+05- php artisan key:generate        #generating application key
+---------------------------------------------------------------------------------------
+06- npm install                     # install npm components
+07- npm run dev                     #compile assets
+08- npm run watch                   #will automatically compile and run in background
+----------------------------------------------------------------------------------------
+09- php artisan preset react        #will use react instead of vue
+10- php artisan preset none         #will remove all javascripts and bootstrap instead of few
+
 
 ```
 
@@ -208,7 +217,7 @@ if ($request->filled('name')) {
 
 ```
 
-### Views
+### [Views](https://laravel.com/docs/5.5/blade)
 
 ```html
 
@@ -229,6 +238,81 @@ if ($request->filled('name')) {
         </ul>
     </div>
 @endif
+
+
+<!-- Creating a template layout. Stored in resources/views/layouts/app.blade.php -->
+
+<html>
+    <head>
+        <title>App Name - @yield('title')</title>
+    </head>
+    <body>
+        @section('sidebar')
+            This is the master sidebar.
+        @show
+
+        <div class="container">
+            @yield('content')
+        </div>
+    </body>
+</html>
+
+
+<!--Extending a layout Stored in resources/views/child.blade.php -->
+
+@extends('layouts.app')
+
+@section('title', 'Page Title')
+
+@section('sidebar')
+    @parent
+
+    <p>This is appended to the master sidebar.</p>
+@endsection
+
+@section('content')
+    <p>This is my body content.</p>
+@endsection
+
+
+<!-- Looping in Blade views -->
+
+@for ($i = 0; $i < 10; $i++)
+    The current value is {{ $i }}
+@endfor
+
+@foreach ($users as $user)
+    <p>This is user {{ $user->id }}</p>
+@endforeach
+
+@forelse ($users as $user)
+    <li>{{ $user->name }}</li>
+@empty
+    <p>No users</p>
+@endforelse
+
+@while (true)
+    <p>I'm looping forever.</p>
+@endwhile
+
+<!-- Include Subviews -->
+<div>
+    @include('shared.errors')
+
+    <form>
+        <!-- Form Contents -->
+    </form>
+</div>
+
+<!-- adding vue component -->
+
+@extends('layouts.app')
+
+@section('content')
+    <example-component></example-component>
+@endsection
+
+
 
 ```
 
