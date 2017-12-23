@@ -3,9 +3,10 @@ This repository is all about cheat sheets and notes for building Laravel project
 
 
 
-## Instalation Related 
+## Usefull Links
 * [Composer](https://getcomposer.org/Composer-Setup.exe)
-
+* [Toastr Library](https://github.com/CodeSeven/toastr)
+* [Preview Library](https://github.com/dusterio/link-preview)
 
 ## Usefull Commands
 
