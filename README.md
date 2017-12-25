@@ -25,6 +25,13 @@ This repository is all about cheat sheets and notes for building Laravel project
 ----------------------------------------------------------------------------------------
 09- php artisan preset react        #will use react instead of vue
 10- php artisan preset none         #will remove all javascripts and bootstrap instead of few
+11- php artisan make:migration create_users_table  #create migration from command
+12- php artisan migrate --force                    # make forced migration
+13- php artisan migrate:reset                   # rollback all migrations
+14- php artisan migrate:refresh
+15- php artisan migrate:refresh --seed
+16- php artisan migrate:fresh
+17- php artisan migrate:fresh --seed
 
 
 ```
