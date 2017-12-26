@@ -117,6 +117,10 @@ Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
 //To protect any route via auth just add middleware 
 Route::get('profile', 'UserController@show')->middleware('auth');
 
+Route::get('profile', function () {
+    // Only authenticated users may enter...
+})->middleware('auth');
+
 //Get request to specific Method of controller
 Route::get('photos/popular', 'PhotoController@method');
 
@@ -161,11 +165,51 @@ Route::prefix('admin')->group(function () {
 ```
 
 
-### Queries
+### [Queries](https://laravel.com/docs/5.5/queries)
 
 ```php
 
 $items = Items::where('active', true)->orderBy('name')->pluck('name', 'id');    //select * from Items where 'active'=true
+
+//single row from the table via first() method
+
+$user = DB::table('users')->where('name', 'John')->first();
+
+//instead of fetching whole row just fetch single value
+
+$email = DB::table('users')->where('name', 'John')->value('email');
+
+// get whole column 
+$titles = DB::table('roles')->pluck('title');
+
+/*
+The query builder also provides a variety of aggregate methods such as count, max, min, avg, and  sum. You may call any of these methods after constructing your query:
+
+*/
+
+$users = DB::table('users')->count();
+$price = DB::table('orders')->max('price');
+$price = DB::table('orders')
+                ->where('finalized', 1)
+                ->avg('price');
+
+
+//getting user detail via scafolded auth
+
+use Illuminate\Support\Facades\Auth;
+
+// Get the currently authenticated user...
+$user = Auth::user();
+
+// Get the currently authenticated user's ID...
+$id = Auth::id();
+
+
+//check if user is authenticated
+
+if (Auth::check()) {
+    // The user is logged in...
+}
 
 ```
 
@@ -231,6 +275,13 @@ if ($request->filled('name')) {
         'title' => 'required|unique:posts|max:255',
         'body' => 'required',
     ]);
+    
+
+//apply middleware to controller
+public function __construct()
+{
+    $this->middleware('auth');
+}
 
 ```
 
