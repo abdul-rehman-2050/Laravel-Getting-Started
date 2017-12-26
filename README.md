@@ -161,6 +161,15 @@ Route::prefix('admin')->group(function () {
 ```
 
 
+### Queries
+
+```php
+
+$items = Items::where('active', true)->orderBy('name')->pluck('name', 'id');    //select * from Items where 'active'=true
+
+```
+
+
 ### [Controllers](https://laravel.com/docs/5.5/controllers)
 
 ```php
