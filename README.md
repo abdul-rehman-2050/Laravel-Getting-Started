@@ -169,6 +169,8 @@ Route::prefix('admin')->group(function () {
 
 ```php
 
+$products = Product::where('name_en', 'LIKE', '%'.$search.'%')->get();
+
 $items = Items::where('active', true)->orderBy('name')->pluck('name', 'id');    //select * from Items where 'active'=true
 
 //single row from the table via first() method
